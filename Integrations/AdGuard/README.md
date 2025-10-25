@@ -92,7 +92,7 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
   > Chi tiết hơn: Là chỗ lưu /tmp/userdata/AdGuard/data nó không hỗ trợ nmap(2) vì format không hỗ trợ, cần bạn nào tìm hiểu phương pháp lưu các file database!  
 * **?: Tại sao phải set `Secondary DNS` là DNS bên thứ 3?**
   * Nếu chưa kịp cài lại và không set `Secondary DNS` thì router sẽ không có DNS để quay dịch domain, đồng nghĩa là bạn ***mất kết nối*** với internet. Vì thế nên để `Secondary DNS` thành bên DNS thứ 3 để tránh trường hợp quên chạy lại AdGuardHome thì vẫn có cái mà dùng  
-* **?: Ở chỗ [Quay DNS](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/AdGuard#2-quay-dns) tại `Secondary DNS` có thể gắn DNS khác không?**
+* **?: Ở chỗ [Quay DNS](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/Integrations/AdGuard#2-quay-dns) tại `Secondary DNS` có thể gắn DNS khác không?**
   * Yep!
 * **?: Không block ads trên điện thoại được với AdGuardHome?**
   * Vào `Cài Đặt -> Kết Nối -> Cài Đặt Kết Nối Khác`, chỉnh `DNS Riêng Tư` thành `Tắt`

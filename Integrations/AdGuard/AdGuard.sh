@@ -47,7 +47,7 @@ echo ""
 echo ""
 echo ""
 echo -e "${GREEN}     Cảm ơn bạn đã sử dụng script của chúng mình! ${RESET}"
-export SSL_CERT_FILE=/tmp/userdata/AdGuard/ca-certificates.crt
+export SSL_CERT_FILE=/tmp/userdata/AdGuard/accvraiz1.crt
 cd /tmp/SafeGate
 /userfs/bin/curl -s -fSL -o AdGuardHome_linux_armv5.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_armv5.tar.gz
 echo -e "\033[32m[OK]\033[0m Đã tải file AdGuard thành công!"

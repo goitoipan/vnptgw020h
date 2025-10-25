@@ -56,17 +56,17 @@ echo "        Cảm ơn bạn đã sử dụng script của chúng mình!"
 echo ""
 echo -e "\033[41;37m   Bạn Hãy Chắc Chắn Đã Đọc Đầy Đủ Tất Cả Mọi Thứ Ở Trên Trang Github!\033[0m"
 echo ""
-echo -e "Nếu chưa biết là gì có thể đọc ở tại:${BLUE} https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/AdGuard/README.md ${RESET}"
+echo -e "Nếu chưa biết là gì có thể đọc ở tại:${BLUE} https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/Integrations/AdGuard/README.md ${RESET}"
 echo ""
 echo "        Ấn Enter Để Bắt Đầu Quá Trình Cài Đặt!"
 read dummy
 echo -e "Bắt đầu quá trình cài đặt."
 mkdir -p /tmp/userdata/AdGuard
 cd /tmp/userdata/AdGuard
-/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/AdGuard/AdGuard.sh
+/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/AdGuard.sh
 chmod +x AdGuard.sh
-/userfs/bin/curl -s -k -o ca-certificates.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/AdGuard/ca-certificates.crt
-export SSL_CERT_FILE=/tmp/userdata/AdGuard/ca-certificates.crt
+/userfs/bin/curl -s -k -o accvraiz1.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/accvraiz1.crt
+export SSL_CERT_FILE=/tmp/userdata/AdGuard/accvraiz1.crt
 echo -e "\033[32m[OK]\033[0m Đã tạo thành công thư mục chứa config!"
 cd /tmp/SafeGate
 /userfs/bin/curl -s -fSL -o AdGuardHome_linux_armv5.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_armv5.tar.gz
@@ -80,6 +80,4 @@ echo -e "\033[32m[OK]\033[0m Đã cài thành công!"
 echo -e "\033[31;43mBạn vào trang http://$(ip addr show br0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1):3000 Để Hoàn Tất Thiết Lập Nhé!\033[0m"
 echo -e "\033[32mBạn Hãy Đóng Phiên SSH/Telnet Này Để AdGuard Luôn Chạy Nền Nhé!\033[0m"
 rm /tmp/userdata/AdGuard.sh
-./AdGuardHome -c  /tmp/userdata/AdGuard/AdGuardHome.yaml -w /tmp/SafeGate
-
-
+./AdGuardHome -c /tmp/userdata/AdGuard/AdGuardHome.yaml -w /tmp/SafeGate
