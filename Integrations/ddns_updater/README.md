@@ -42,7 +42,8 @@ mkdir busy
 cd /tmp && /userfs/bin/curl -k -o install-ddns.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/ddns_updater/install.sh && chmod +x install-ddns.sh && sh install-ddns.sh
 ```
 * Nó sẽ lên như thế này  
-(TODO: add init ddnsupdater image)
+<img width="931" height="896" alt="Screenshot 2025-10-25 193709" src="https://github.com/user-attachments/assets/fc122be1-fd80-4f45-af3a-c1d5bcae0dcb" />
+
 * Check app đã chạy hay chưa bằng cách access vào `http://(gateway ip):8000`, nếu lên UI được thì ok, không thì xem lại có bị block iptables hay không  
 * Ctrl + C để thoát vì cần phải config nữa.
 
