@@ -99,7 +99,9 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
   > Đấy là cách chỉnh dựa trên điện thoại Samsung, các điện thoại Android khác lẫn IPhone cũng sẽ có cách  
   > Cứ tra google là được mà  
 * **?: Chỗ `Máy Chủ DNS` mà nó báo `Port 53 đã bị sử dụng`?**
-  * Mở shell và nhập `kill -9 $(pidof dnsmasq)` xong reload và tiếp tục 
+  * Mở shell và nhập `kill -9 $(pidof dnsmasq)` xong reload và tiếp tục
+* **?: Có nên update khi AdGuard có bản update không?**
+  * Bạn chỉ **nên** khi mới restart router, phần cái update của AdGuard sẽ tạo ra file khá loạn, ảnh hưởng sau này 
 * **?: "Vấn đề khác của AdGuardHome mà trên kia không có!"**
   * Tạo [Issue](https://github.com/Expl01tHunt3r/vnptmodemresearch/issues) với title có đề `[AdGuard]` đầu để hỗ trợ
 <h4 align="center">The End</h4>
