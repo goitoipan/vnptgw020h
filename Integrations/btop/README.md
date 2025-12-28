@@ -1,5 +1,6 @@
 
-<h1 align="center">AdGuardHome Installer</h1>
+<img width="349" height="98" align="center" alt="image" src="https://github.com/user-attachments/assets/678652c5-d011-4e3b-9bb7-037ffa8b979a" />
+
 <h4 align="center">nhưng là cho dòng 4 chữ~</h4>
 <img width="27" height="27" alt="image" align="right" src="https://github.com/user-attachments/assets/de8413fe-b942-487b-a6d8-3f5111d292c9" />
 
@@ -8,7 +9,6 @@
 > Nên tất cả các assets (ảnh, file, ...) liên quan đều được đánh bản quyền bởi các dev của btop
 
 ## 1: <ins>Yêu cầu</ins>
-<img width="349" height="98" alt="image" src="https://github.com/user-attachments/assets/0753c5dd-cb54-4f84-9d3e-9f3c37332f9c" />
 
 
 * Mở được Telnet/SSH trên router đã đề cập ở [ngoài kia](https://github.com/Expl01tHunt3r/vnptmodemresearch?tab=readme-ov-file#3-shell-v%C3%A0-nh%E1%BB%AFng-ng%C6%B0%E1%BB%9Di-b%E1%BA%A1n-tty-ssh-)
