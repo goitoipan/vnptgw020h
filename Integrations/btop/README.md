@@ -1,5 +1,5 @@
 
-<img width="349" height="98" align="center" alt="image" src="https://github.com/user-attachments/assets/678652c5-d011-4e3b-9bb7-037ffa8b979a" />
+<img width="349" height="98" alt="image" align="center" src="https://github.com/user-attachments/assets/678652c5-d011-4e3b-9bb7-037ffa8b979a" />
 
 <h4 align="center">nhưng là cho dòng 4 chữ~</h4>
 <img width="27" height="27" alt="image" align="right" src="https://github.com/user-attachments/assets/de8413fe-b942-487b-a6d8-3f5111d292c9" />
