@@ -198,6 +198,7 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * [ddns-updater](https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/Integrations/ddns_updater)
 * Caddy
 * Btop
+* ilovecustomLED
 > Sẽ có hướng dẫn cài sắp tới
 
 
