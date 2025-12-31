@@ -200,8 +200,11 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * Btop
 * ilovecustomLED
 > Sẽ có hướng dẫn cài sắp tới
-
-
+---
+## 9: <ins>Thảo luận</ins>
+* [VOZ](http://voz.vn/t/vnptmodemresearch-%E2%80%94-nghien-cuu-firmware-root-modem-vnpt-can-anh-em-chung-tay.1159218)
+* [Github](https://github.com/Expl01tHunt3r/vnptmodemresearch/discussions/10)
+* ~~Discord~~
 ## Cập nhật
 * Em đã làm 1 web online để có thể tự giải mã và mã hoá file mà không cần các bác phải cài này nọ tại [đây](https://huggingface.co/spaces/Expl01tHunt3r/file-decoder)
 	* (hoặc dùng hosting Việt Nam với ping chỉ = 15ms!! -> https://cfgdecoder.fkrystal.qzz.io) 
