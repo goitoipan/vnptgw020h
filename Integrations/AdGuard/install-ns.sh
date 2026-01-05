@@ -63,7 +63,7 @@ read dummy
 echo -e "Bắt đầu quá trình cài đặt."
 mkdir -p /tmp/userdata/AdGuard
 cd /tmp/userdata/AdGuard
-/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/AdGuard.sh
+/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/startup.sh
 chmod +x AdGuard.sh
 /userfs/bin/curl -s -k -o accvraiz1.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/accvraiz1.crt
 export SSL_CERT_FILE=/tmp/userdata/AdGuard/accvraiz1.crt
