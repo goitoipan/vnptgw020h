@@ -1,21 +1,9 @@
 #!/usr/bin/env python3
 """
-romfile_crypto.py
+RomFileTool-H.py
+Copyright © 2024-2025 Expl01tHunt3r, collaborators and contributors.
 
-Usage:
-  Encrypt: python3 romfileedit-h.py /path/to/file 1
-  Decrypt: python3 romfileedit-h.py /path/to/file 0
-
-Notes:
- - Algorithm: AES-256-CBC
- - Key  (hex): 774257516156556C4B6D62354E774171394E47325634414D5A41454478513D3D
- - IV   (hex): 2b6656744e5432514271484d5a7a4f50
- - Encryption processes plaintext in chunks of 0x400 (1024) bytes,
-   each chunk encrypted independently with the same key & IV.
- - Decryption reads ciphertext chunks (up to 0x410 bytes) and decrypts
-   each independently; PKCS#7 unpad is applied only to the final chunk.
-Requirements:
-  pip install pycryptodome
+Note: pip install pycryptodome
 """
 import os
 import sys
@@ -39,15 +27,25 @@ def validate_key_iv():
     if len(IV) != 16:
         raise SystemExit("ERROR: iv length != 16 bytes.")
 
-def encrypt_stream(fin, fout):
-    """Read plaintext in chunks and write ciphertext (each chunk encrypted independently)."""
+def encrypt_stream_chunked(fin, fout):
+    cur = fin.read(MAX_CIPHER_CHUNK)
+    if len(cur) == 0:
+        return
     while True:
-        plain = fin.read(PLAINTEXT_CHUNK)
-        if not plain:
-            break
+        nxt = fin.read(MAX_CIPHER_CHUNK)
         cipher = AES.new(KEY, AES.MODE_CBC, IV)
-        ct = cipher.encrypt(pad(plain, AES.block_size))
-        fout.write(ct)
+        if nxt:
+            if len(cur) % AES.block_size != 0:
+                raise ValueError(f"Input stream error: Intermediate chunk size ({len(cur)}) is not block-aligned.")
+            ciphertext = cipher.encrypt(cur)
+            fout.write(ciphertext)
+            cur = nxt
+            continue
+        else:
+            padded_data = pad(cur, AES.block_size)
+            ciphertext = cipher.encrypt(padded_data)
+            fout.write(ciphertext)
+            break
 
 def decrypt_stream_chunked(fin, fout):
     """
@@ -115,7 +113,7 @@ def main():
 
     if mode == "1":
         print(f"Encrypting '{inp}' -> '{inp}.enc' (chunked AES-256-CBC)")
-        out = atomic_process(inp, encrypt_stream, "encrypt")
+        out = atomic_process(inp, encrypt_stream_chunked, "encrypt")
     else:
         print(f"Decrypting '{inp}' -> '{inp}.dec' (chunked AES-256-CBC)")
         out = atomic_process(inp, decrypt_stream_chunked, "decrypt")
