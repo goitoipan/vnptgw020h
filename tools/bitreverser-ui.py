@@ -8,7 +8,6 @@ Note: Must use FkrystalLib included in this repository.
 import FkrystalLib as lib
 
 def invert_file_chunked(filepath, stop_event, progress_callback):
-    INVERT_TABLE = bytes.maketrans(bytes(range(256)), bytes((x ^ 0xFF) for x in range(256)))
     try:
         file_size = lib.os.path.getsize(filepath)
         chunk_size = 1024 * 1024
@@ -21,7 +20,7 @@ def invert_file_chunked(filepath, stop_event, progress_callback):
                 chunk = f.read(chunk_size)
                 if not chunk:
                     break
-                inverted_chunk = chunk.translate(INVERT_TABLE)
+                inverted_chunk = chunk.translate(bytes.maketrans(bytes(range(256)), bytes((x ^ 0xFF) for x in range(256))))
                 processed_parts.append(inverted_chunk)
                 bytes_read += len(chunk)
                 if file_size > 0:
@@ -72,6 +71,7 @@ class BitReverserUI:
         lib.tkinter.ttk.Button(self.toolbar, text="Open Folder", command=self.open_directory).pack(side="left", padx=2)
         lib.tkinter.ttk.Button(self.toolbar, text="Save Current", command=self.save_file).pack(side="left", padx=2)
         lib.tkinter.ttk.Button(self.toolbar, text="Close Tab", command=self.close_current_tab).pack(side="left", padx=10)
+        lib.tkinter.ttk.Label(self.toolbar, text="  (Double-click file to Process)", font=("Segoe UI", 9, "italic")).pack(side="left", padx=10)
         self.paned = lib.tkinter.ttk.PanedWindow(root, orient="horizontal")
         self.paned.pack(fill="both", expand=True)
         self.sidebar = lib.tkinter.ttk.Frame(self.paned, width=250)
