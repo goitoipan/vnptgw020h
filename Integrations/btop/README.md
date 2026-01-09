@@ -30,7 +30,6 @@ cd /tmp && /userfs/bin/curl -k -o install-btop.sh https://raw.githubusercontent.
 **ờ thì có gì để nói đâu?**
 <h4 align="center">The End</h4>
 <h6 align="right">AppleSang With 🍎</h6>
-<h6 align="right">Modified by Fkrystal with Rals</h6>
 
 
 
