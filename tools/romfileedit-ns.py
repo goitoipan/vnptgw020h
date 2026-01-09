@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 RomFileTool-NS.py
-Copyright © 2024-2025 Expl01tHunt3r, collaborators and contributors.
+Copyright © 2025-2026 Expl01tHunt3r, collaborators and contributors.
 
 Note: pip install pycryptodome
 """
@@ -10,17 +10,12 @@ import sys
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 
-# --- Config from analysis ---
-KEY_HEX = "2f52536c386d4d70373073554a506a7841327a54773152377272752f6e673d3d"
-IV_HEX  = "3530397a30567641743057452f573745"
+KEY = bytes.fromhex("2f52536c386d4d70373073554a506a7841327a54773152377272752f6e673d3d")
+IV  = bytes.fromhex("3530397a30567641743057452f573745")
 
-KEY = bytes.fromhex(KEY_HEX)
-IV  = bytes.fromhex(IV_HEX)
+PLAINTEXT_CHUNK = 0x400
+MAX_CIPHER_CHUNK = 0x410
 
-PLAINTEXT_CHUNK = 0x400  # 1024 bytes read for encrypt
-MAX_CIPHER_CHUNK = 0x410 # max ciphertext chunk size read for decrypt (may be smaller for last chunk)
-
-# --- Helpers ---
 def validate_key_iv():
     if len(KEY) != 32:
         raise SystemExit("ERROR: key length != 32 bytes.")
@@ -48,29 +43,19 @@ def encrypt_stream_chunked(fin, fout):
             break
 
 def decrypt_stream_chunked(fin, fout):
-    """
-    Decrypt chunked ciphertext when each encrypted chunk was produced independently
-    with the same IV. We don't know chunk boundaries exactly beforehand, so we use
-    a 2-buffer approach: read current chunk and peek next chunk to decide if current
-    is last. Unpad only the final decrypted chunk.
-    """
-    # Read first chunk
     cur = fin.read(MAX_CIPHER_CHUNK)
     if not cur:
-        return  # empty input
+        return
 
     while True:
         nxt = fin.read(MAX_CIPHER_CHUNK)
-        # decrypt current
         cipher = AES.new(KEY, AES.MODE_CBC, IV)
         plain = cipher.decrypt(cur)
         if nxt:
-            # not the last chunk; write raw decrypted bytes (should be full blocks)
             fout.write(plain)
             cur = nxt
             continue
         else:
-            # cur is the last encrypted chunk -> attempt unpad
             try:
                 plain = unpad(plain, AES.block_size)
             except ValueError as e:

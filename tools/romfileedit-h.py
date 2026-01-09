@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 RomFileTool-H.py
-Copyright © 2024-2025 Expl01tHunt3r, collaborators and contributors.
+Copyright © 2025-2026 Expl01tHunt3r, collaborators and contributors.
 
 Note: pip install pycryptodome
 """
@@ -10,17 +10,11 @@ import sys
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 
-# --- Config from analysis ---
-KEY_HEX = "774257516156556C4B6D62354E774171394E47325634414D5A41454478513D3D"
-IV_HEX  = "2b6656744e5432514271484d5a7a4f50"
+KEY = bytes.fromhex("774257516156556C4B6D62354E774171394E47325634414D5A41454478513D3D")
+IV  = bytes.fromhex("2b6656744e5432514271484d5a7a4f50")
+PLAINTEXT_CHUNK = 0x400 
+MAX_CIPHER_CHUNK = 0x410
 
-KEY = bytes.fromhex(KEY_HEX)
-IV  = bytes.fromhex(IV_HEX)
-
-PLAINTEXT_CHUNK = 0x400  # 1024 bytes read for encrypt
-MAX_CIPHER_CHUNK = 0x410 # max ciphertext chunk size read for decrypt (may be smaller for last chunk)
-
-# --- Helpers ---
 def validate_key_iv():
     if len(KEY) != 32:
         raise SystemExit("ERROR: key length != 32 bytes.")
@@ -48,29 +42,19 @@ def encrypt_stream_chunked(fin, fout):
             break
 
 def decrypt_stream_chunked(fin, fout):
-    """
-    Decrypt chunked ciphertext when each encrypted chunk was produced independently
-    with the same IV. We don't know chunk boundaries exactly beforehand, so we use
-    a 2-buffer approach: read current chunk and peek next chunk to decide if current
-    is last. Unpad only the final decrypted chunk.
-    """
-    # Read first chunk
     cur = fin.read(MAX_CIPHER_CHUNK)
     if not cur:
-        return  # empty input
-
+        return
     while True:
         nxt = fin.read(MAX_CIPHER_CHUNK)
-        # decrypt current
         cipher = AES.new(KEY, AES.MODE_CBC, IV)
         plain = cipher.decrypt(cur)
         if nxt:
-            # not the last chunk; write raw decrypted bytes (should be full blocks)
+
             fout.write(plain)
             cur = nxt
             continue
         else:
-            # cur is the last encrypted chunk -> attempt unpad
             try:
                 plain = unpad(plain, AES.block_size)
             except ValueError as e:
@@ -84,11 +68,10 @@ def atomic_process(inp_path, func, mode_label):
     out_name = basename + (".enc" if mode_label == "encrypt" else ".dec")
     out_path = os.path.join(dirname, out_name)
     tmp_path = out_path + ".tmp"
-
+    
     with open(inp_path, "rb") as fin, open(tmp_path, "wb") as fout:
         func(fin, fout)
-
-    # atomic replace
+        
     os.replace(tmp_path, out_path)
     return out_path
 

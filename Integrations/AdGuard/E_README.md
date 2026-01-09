@@ -70,23 +70,11 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
 * Thế là xong. Còn setup AdGuardHome này nọ thi mời lên Google, nói ở đây thì dài lắm
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/65ca3512-f326-404f-a05b-689a662a64ab" />
 
-## 5: <ins>"Mất Điện"</ins>
-> Mời đọc [FAQ](https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/AdGuard/README.md#6-faqs) sẽ hiểu tại sao có mục này
-* SSH/Telnet vào router
-<img width="456" height="133" alt="image" src="https://github.com/user-attachments/assets/551a9f3e-c71c-4d89-b95a-c597a9e4d88f" />
-
-* Paste lệnh vào shell
-```sh
-/tmp/userdata/AdGuard/AdGuard.sh
-```
-* Nó sẽ tự cài lại cho
-<img width="969" height="503" alt="image" src="https://github.com/user-attachments/assets/2cecc5f5-adb1-4203-a51c-14a3d30f1bd5" />
-
-* Xong tắt SSH/Telnet (đừng Ctrl+C, dùng nút X kia)
+## 4: <ins>Chạy Cùng Hệ Thống</ins>
+* Vào WebUI  
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7a6a5ea0-7edc-488f-9211-5007ddc9eff7" />
 
 ## 6: <ins>FAQs</ins>
-* **?: Tại sao phải chạy lại script sau mất điện?**
-  * Tất cả các file (trừ config) đều lưu tại `/tmp/SafeGate`, mà nó lại là `tmpfs` nên sau khi reboot (mất điện) thì nó trắng bóc, không còn cái gì cả nên chạy lại để nó tự cài lại cho  
 * **?: Số liệu (size blocked, ...) của AdGuardHome đều set 0 khi reboot?**
   * Như trên, tất cả (trừ config) đều trắng bóc khi reboot (mất điện)
   > Chi tiết hơn: Là chỗ lưu /tmp/userdata/AdGuard/data nó không hỗ trợ nmap(2) vì format không hỗ trợ, cần bạn nào tìm hiểu phương pháp lưu các file database!  
