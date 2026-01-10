@@ -27,6 +27,7 @@
 cd /tmp/userdata
 mkdir busy
 /userfs/bin/curl -k -o busy/busybox https://busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-armv5l
+chmod 777 /tmp/userdata/busy/busybox
 ```
 * (Sau bước này, tất cả các lệnh **"nc"** đều thay cho **"/tmp/userdata/busy/busybox nc"** trên router)
 
