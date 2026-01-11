@@ -8,7 +8,7 @@
 
 * Mở được Telnet/SSH trên router đã đề cập ở [ngoài kia](https://github.com/Expl01tHunt3r/vnptmodemresearch?tab=readme-ov-file#3-shell-v%C3%A0-nh%E1%BB%AFng-ng%C6%B0%E1%BB%9Di-b%E1%BA%A1n-tty-ssh-)
 * Phải đang ở bản build của ngày 5/3/2025 | Có thể check trong WebUI
-`Nếu khác bản build thì có thể tải firmware tại [đây](https://blogvnpt.blogspot.com/2025/03/firmware-g040e5vn0t0203-cho-gpon-ont_18.html)`
+> Nếu khác bản build thì có thể tải firmware tại [đây](https://blogvnpt.blogspot.com/2025/03/firmware-g040e5vn0t0203-cho-gpon-ont_18.html)
 
 > [!CAUTION]
 > **Bạn sẽ tự chịu hết các hậu quả đi kèm nếu làm theo!!!**  
