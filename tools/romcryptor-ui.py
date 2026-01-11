@@ -246,7 +246,7 @@ class ChoiceDialog:
         self.top.destroy()
 
 if __name__ == "__main__":
-    root = lib.tkinter.Tk()
+    root = lib.tkinter.Tk(className="FkrysRomCryptor")
     root.iconphoto(True, lib.tkinter.PhotoImage(data=lib.i))
     RomCryptorUI(root)
     root.mainloop()

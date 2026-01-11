@@ -92,8 +92,7 @@ class BitReverserUI:
         root_node = self.tree.insert("", "end", text=lib.os.path.basename(path), open=True)
         for root_dirs, dirs, files in lib.os.walk(path):
             for file in files:
-                full_path = lib.os.path.join(root_dirs, file)
-                self.tree.insert(root_node, "end", text=file, values=(full_path,))
+                self.tree.insert(root_node, "end", text=file, values=(lib.os.path.join(root_dirs, file),))
 
     def on_tree_double_click(self, event):
         selection = self.tree.selection()
@@ -207,7 +206,7 @@ class BitReverserUI:
                 break
 
 if __name__ == "__main__":
-    root = lib.tkinter.Tk()
+    root = lib.tkinter.Tk(className="FkrysBitReverser")
     root.iconphoto(True, lib.tkinter.PhotoImage(data=lib.i))
     BitReverserUI(root)
     root.mainloop()
