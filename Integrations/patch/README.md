@@ -1,11 +1,11 @@
 # Những patch trên VNPT
 
 ## 1: <ins>Yêu cầu</ins>
-<img src="https://avatars.githubusercontent.com/u/30082422" width="128" height="128" alt="adguard" align="right" />
+<img width="128" height="128" alt="image" src="https://github.com/user-attachments/assets/b17f8ebf-e35e-4d68-9d60-a06b93767dc8" align="right" />
+
 
 * Mở được Telnet/SSH trên router đã đề cập ở [ngoài kia](https://github.com/Expl01tHunt3r/vnptmodemresearch?tab=readme-ov-file#3-shell-v%C3%A0-nh%E1%BB%AFng-ng%C6%B0%E1%BB%9Di-b%E1%BA%A1n-tty-ssh-)
-* Có hiểu biết về networking và biết ứng phó những lỗi xảy ra
-* Phải có thông tin gateway WebUI để setup
+
 
 > [!CAUTION]
 > **Bạn sẽ tự chịu hết các hậu quả đi kèm nếu làm theo!!!**  
