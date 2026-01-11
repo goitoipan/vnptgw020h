@@ -40,7 +40,7 @@ chmod 777 /tmp/userdata/busy/busybox
 > **LƯU Ý TRƯỚC KHI CHẠY, KHÔNG LÀ MẤT HẾT CONFIG THÌ PHẢI TỰ CHỊU**  
 
 ```sh
-cd /tmp && /userfs/bin/curl -k -o install-ddns.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/ddns_updater/install.sh && chmod +x install-ddns.sh && sh install-ddns.sh
+cd /tmp && /userfs/bin/curl -k -o install-ddns.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/ddns_updater/install.sh && chmod +x install-ddns.sh && sh install-ddns.sh
 ```
 * Nó sẽ lên như thế này  
 <img width="931" height="896" alt="Screenshot 2025-10-25 193709" src="https://github.com/user-attachments/assets/fc122be1-fd80-4f45-af3a-c1d5bcae0dcb" />

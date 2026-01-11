@@ -34,7 +34,7 @@ read _
 echo -e "Starting installation..."
 mkdir -p /tmp/userdata/AdGuard
 cd /tmp/userdata/AdGuard
-/userfs/bin/curl -s -k -o ca.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/accvraiz1.crt
+/userfs/bin/curl -s -k -o ca.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/AdGuard/accvraiz1.crt
 export SSL_CERT_FILE=/tmp/userdata/AdGuard/ca.crt
 echo -e "${GREEN}[OK]${RESET} Downloaded certificate."
 cd /tmp/SafeGate
