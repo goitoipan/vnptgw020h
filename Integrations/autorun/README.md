@@ -30,6 +30,7 @@ cd /tmp/SafeGate/ && /userfs/bin/curl -s -k -o autorun.sh https://raw.githubuser
 * Bấm **Enter** 
 * **Enter** thêm lần nữa.  
 <img width="979" height="521" alt="image" src="https://github.com/user-attachments/assets/466daa99-95ac-4dbd-b336-dd833eee03ac" />
+
 * chờ....
 * chờ....
 * xong rồi đó, giờ router sẽ chạy những lệnh trong file `/tmp/userdata/startup.sh` khi kết nối mạng thành công
