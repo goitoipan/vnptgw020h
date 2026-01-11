@@ -1,4 +1,4 @@
-# Những patch trên VNPT
+# Patch | AutoRun
 
 ## 1: <ins>Yêu cầu</ins>
 <img width="128" height="128" alt="image" src="https://github.com/user-attachments/assets/b17f8ebf-e35e-4d68-9d60-a06b93767dc8" align="right" />
