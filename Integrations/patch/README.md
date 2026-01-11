@@ -25,7 +25,11 @@ cd /tmp/SafeGate/ && /userfs/bin/curl -s -k -o patch_ar.sh https://raw.githubuse
 ```
 
 * Hãy **CHẮC CHẮN** đọc hết phần text trước khi bấm **Enter** *(nếu hiểu thì thôi .-.)*
-<img width="982" height="512" alt="image" src="https://github.com/user-attachments/assets/ca525647-5626-486e-a237-7425d160a51f" />
+<img width="979" height="454" alt="image" src="https://github.com/user-attachments/assets/2aa22f52-da1b-42e7-9c6e-1b0790e9eae1" />
+
 
 * chờ....
 * chờ....
+* xong rồi đó, giờ router sẽ chạy những lệnh trong file /tmp/userdata/startup.sh khi kết nối mạng thành công
+* nếu bạn muốn edit thì chỉ có thể xài echo hoặc sed
+* còn cách sử dụng cứ chatgpt hoặc gemini đi
