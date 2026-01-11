@@ -70,10 +70,6 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
 * Thế là xong. Còn setup AdGuardHome này nọ thi mời lên Google, nói ở đây thì dài lắm
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/65ca3512-f326-404f-a05b-689a662a64ab" />
 
-## 4: <ins>Chạy Cùng Hệ Thống</ins>
-* Vào WebUI  
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7a6a5ea0-7edc-488f-9211-5007ddc9eff7" />
-
 ## 6: <ins>FAQs</ins>
 * **?: Số liệu (size blocked, ...) của AdGuardHome đều set 0 khi reboot?**
   * Như trên, tất cả (trừ config) đều trắng bóc khi reboot (mất điện)
