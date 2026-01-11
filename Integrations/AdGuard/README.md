@@ -1,5 +1,7 @@
-<h1 align="center">AdGuardHome Installer</h1>
+<h1 align="center">AdGuardHome</h1>
 <h4 align="center">nhưng là cho dòng 4 chữ~</h4>
+<h6 align="left">AppleSang, D:11/M:01/Y:2026</h6>
+<h6 align="left">BussyBakks, D:11/M:01/Y:2026</h6>
 <img width="27" height="27" alt="image" align="right" src="https://github.com/user-attachments/assets/de8413fe-b942-487b-a6d8-3f5111d292c9" />
 
 > [!NOTE]
@@ -23,12 +25,12 @@
 > Còn dòng -H có lỗi reboot sau khi chạy script, chúng mình vẫn đang nấu vụ đó, mà ai có dòng -H có thể liên hệ [Discord](https://discordapp.com/users/1086149348414464041) để góp vui :)
 
 ## 2: <ins>Cài Đặt</ins>
-* SSH/Telnet vào router
+* SSH/Telnet vào router  
 <img width="469" height="146" alt="image" src="https://github.com/user-attachments/assets/cde8d9f6-be70-44d9-86bd-41d13cd54da5" />
 
 * Paste lệnh dưới vào shell
 ```sh
-cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/AdGuard/install-ns.sh && chmod +x AdGuard.sh && sh AdGuard.sh
+cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/AdGuard/install/ns.sh && chmod +x AdGuard.sh && sh AdGuard.sh
 ```
 
 * Hãy **CHẮC CHẮN** đọc hết phần text trước khi bấm **Enter** *(nếu hiểu thì thôi .-.)*

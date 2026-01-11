@@ -2,6 +2,8 @@
 <img width="349" height="98" alt="image" src="https://github.com/user-attachments/assets/678652c5-d011-4e3b-9bb7-037ffa8b979a" />
 </div>
 <h4 align="center">nhưng là cho dòng 4 chữ~</h4>
+<h6 align="left">AppleSang, D:02/M:01/Y:2026</h6>
+<h6 align="left">BussyBakks, D:09/M:01/Y:2026</h6>
 <img width="27" height="27" alt="image" align="right" src="https://github.com/user-attachments/assets/de8413fe-b942-487b-a6d8-3f5111d292c9" />
 
 ## 1: <ins>Yêu cầu</ins>

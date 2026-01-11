@@ -1,5 +1,4 @@
 #!/bin/sh
-
 GREEN='\033[32m'   
 BLUE='\033[34m'   
 RESET='\033[0m'
@@ -20,7 +19,7 @@ echo -e "${GREEN} https://github.com/Expl01tHunt3r/vnptmodemresearch\n"
 echo -e "${RED}############################################################\n"
 echo -e "        ${YELLOW}Press enter to confirm for patch ${CYAN}AdGuardHome${RESET}"
 read _
-echo -e "Start installation."
+echo -e "Starting installation..."
 mkdir -p /tmp/userdata/AdGuard
 cd /tmp/userdata/AdGuard
 /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/AdGuard/startup.sh

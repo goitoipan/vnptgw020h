@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# AdGuardHome-NS.sh
+# Copyright © 2025-2026 Expl01tHunt3r, collaborators and contributors.
+#
+# Note: this exactly a shell script run in terminal
+
+GREEN='\033[32m'   
+BLUE='\033[34m'   
+RESET='\033[0m'
+RED='\033[31m'
+BOLD='\033[1m'
+
+install_autorun() {
+    cd /tmp && /userfs/bin/curl -s -k -o autorun.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/autorun/patch.sh && chmod +x autorun.sh && sh autorun.sh
+    cd /tmp && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && cp startup.sh /tmp/userdata/startup.sh
+    echo "Done loading AdGuardHome startup script."
+}
+
+AUTORUN_INSTALLED=true
+echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+
+if [ ! -f /tmp/userdata/startup.sh ]; then
+    AUTORUN_INSTALLED=false
+fi
+
+echo -e "\033[31;43mScript Make By AppleSang With <3\033[0m\n"
+echo -e "${RED}############################################################\n"
+echo -e "${GREEN} https://github.com/Expl01tHunt3r/vnptmodemresearch\n"
+echo -e "${RED}############################################################\n"
+echo -e "        ${YELLOW}Press enter to confirm installing ${CYAN}AdGuardHome${RESET}"
+read _
+
+echo -e "Starting installation..."
+mkdir -p /tmp/userdata/AdGuard
+cd /tmp/userdata/AdGuard
+/userfs/bin/curl -s -k -o ca.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/accvraiz1.crt
+export SSL_CERT_FILE=/tmp/userdata/AdGuard/ca.crt
+echo -e "${GREEN}[OK]${RESET} Downloaded certificate."
+cd /tmp/SafeGate
+/userfs/bin/curl -s -fSL -o AdG_armv5l.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_armv5.tar.gz
+tar -xzf AdG_armv5l.tar.gz
+echo -e "${GREEN}[OK]${RESET} Downloaded AdGuardHome."
+rm AdG_armv5l.tar.gz
+cd AdGuardHome
+chmod +x AdGuardHome
+kill -9 $(pidof dnsmasq)
+if [!AUTORUN_INSTALLED]; then
+    echo -e "Looks like you didn't install our Autorun module yet."
+    echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
+    echo -e "You can see our Autorun here: https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
+    echo -e "Do you want to install Autorun? (Y/N)"
+    read -p "" CONFIRM_AUTORUN_INSTALL
+    case $CONFIRM_AUTORUN_INSTALL in
+        [Yy]* ) install_autorun ;;
+        [Nn]* ) echo "You choosed no. Thanks for your confirmation." ;;
+        * ) echo "Default is no.";;
+    esac
+else
+    cd /tmp && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && cp startup.sh /tmp/userdata/startup.sh
+fi
+echo -e "${GREEN}[OK]${RESET} Finished installing AdGuardHome."
+echo -e "\033[31;43mVisit http://$(ip addr show br0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1):3000 to finish setup!\033[0m"
+echo -e "${RED}!!! CLOSE THE TERMINAL, NOT CTRL+C !!!${RESET}"
+rm /tmp/userdata/AdGuard.sh
