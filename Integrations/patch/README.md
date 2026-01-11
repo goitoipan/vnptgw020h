@@ -25,7 +25,8 @@ cd /tmp/SafeGate/ && /userfs/bin/curl -s -k -o patch_ar.sh https://raw.githubuse
 ```
 
 * Hãy **CHẮC CHẮN** đọc hết phần text trước khi bấm **Enter** *(nếu hiểu thì thôi .-.)*
-<img width="979" height="454" alt="image" src="https://github.com/user-attachments/assets/2aa22f52-da1b-42e7-9c6e-1b0790e9eae1" />
+<img width="979" height="521" alt="image" src="https://github.com/user-attachments/assets/466daa99-95ac-4dbd-b336-dd833eee03ac" />
+
 
 
 * chờ....
