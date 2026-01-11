@@ -15,3 +15,17 @@
 > [!WARNING]
 > Hiện tại chỉ có dòng [GW040-NS](https://www.vnpt-technology.vn/vi/product_detail/gpon-ont-igate-gw040-ns) đã confirm chạy okay  
 > Còn dòng -H có lỗi reboot sau khi chạy script, chúng mình vẫn đang nấu vụ đó, mà ai có dòng -H có thể liên hệ [Discord](https://discordapp.com/users/1086149348414464041) để góp vui :)
+## 2: <ins>Cài Đặt</ins>
+* SSH/Telnet vào router
+<img width="469" height="146" alt="image" src="https://github.com/user-attachments/assets/cde8d9f6-be70-44d9-86bd-41d13cd54da5" />
+
+* Paste lệnh dưới vào shell
+```sh
+cd /tmp/SafeGate/ && /userfs/bin/curl -s -k -o patch_ar.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/patch/autorun.sh && chmod +x patch_ar.sh && sh patch_ar.sh
+```
+
+* Hãy **CHẮC CHẮN** đọc hết phần text trước khi bấm **Enter** *(nếu hiểu thì thôi .-.)*
+<img width="982" height="512" alt="image" src="https://github.com/user-attachments/assets/ca525647-5626-486e-a237-7425d160a51f" />
+
+* chờ....
+* chờ....
