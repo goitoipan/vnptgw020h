@@ -38,7 +38,7 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
 
 * chờ....
 * chờ....
-* Để ý ```Bạn Vào Trang http://192.168...```. Muốn tiếp thì vào đó và tiếp tục mục 3
+* Để ý ```http://192.168...```. Muốn tiếp thì vào đó và tiếp tục mục 3
 > Đóng shell hiện tại để nó chạy nền. Cần làm tiếp thì cứ SSH/Telnet bằng session khác.
 <img width="977" height="512" alt="image" src="https://github.com/user-attachments/assets/83374ff7-cb10-41dc-9b3e-e4ada4701c39" />
 
