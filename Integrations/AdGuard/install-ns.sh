@@ -2,8 +2,18 @@
 
 GREEN='\033[32m'   
 BLUE='\033[34m'   
-RESET='\033[0m'    
+RESET='\033[0m'
+RED='\033[31m'
+
 echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+
+if [ ! -f /tmp/userdata/startup.sh ]; then
+    echo -e "${RED}Error: ${RESET}Patch AutoRun not found"
+    echo "Go to this link below to install"
+    echo "https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
+    exit 1
+fi
+
 echo -e "\033[31;43mScript Make By AppleSang With <3\033[0m\n"
 echo -e "${RED}############################################################\n"
 echo -e "${GREEN} https://github.com/Expl01tHunt3r/vnptmodemresearch\n"
@@ -13,7 +23,7 @@ read _
 echo -e "Start installation."
 mkdir -p /tmp/userdata/AdGuard
 cd /tmp/userdata/AdGuard
-/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/startup.sh
+/userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/AdGuard/startup.sh
 chmod +x AdGuard.sh
 /userfs/bin/curl -s -k -o accvraiz1.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/main/Integrations/AdGuard/accvraiz1.crt
 export SSL_CERT_FILE=/tmp/userdata/AdGuard/accvraiz1.crt
@@ -30,4 +40,6 @@ echo -e "\033[32m[OK]\033[0m Finish Install AdGuardHome to your VNPT router!"
 echo -e "\033[31;43mPlease visit http://$(ip addr show br0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1):3000 to finish setup!\033[0m"
 echo -e "\033[32mJust close this terminal, not Ctrl+C!\033[0m"
 rm /tmp/userdata/AdGuard.sh
+grep -q "^sh /tmp/userdata/AdGuard/AdGuard.sh$" /tmp/userdata/startup.sh || \
+echo "sh /tmp/userdata/AdGuard/AdGuard.sh" >> /tmp/userdata/startup.sh
 ./AdGuardHome -c /tmp/userdata/AdGuard/AdGuardHome.yaml -w /tmp/SafeGate >/dev/null 2>&1 &
