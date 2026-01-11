@@ -120,6 +120,7 @@ class BitReverserUI:
             self.status_label.pack(pady=(20, 5))
             self.progress = lib.tkinter.ttk.Progressbar(self.loading_dialog, mode='determinate', length=300)
             self.progress.pack(pady=5)
+            self.indeterminate_progress = lib.tkinter.ttk.Progressbar(self.loading_dialog, mode='indeterminate', length=300)
             btn = lib.tkinter.ttk.Button(self.loading_dialog, text="Cancel", command=self.cancel_processing)
             btn.pack(pady=10)
             self.thread_result = None
@@ -153,9 +154,9 @@ class BitReverserUI:
                 else:
                     if self.loading_dialog.winfo_exists():
                         self.status_label.config(text="Rendering text... (App will freeze)")
-                        self.progress.stop()
-                        self.progress.mode = 'indeterminate'
-                        self.progress.start(5)
+                        self.progress.pack_forget()
+                        self.indeterminate_progress.pack(pady=5)
+                        self.indeterminate_progress.start(5)
                         self.loading_dialog.update()
                     self.create_new_tab(filename, self.thread_result)
                     if self.loading_dialog.winfo_exists():
