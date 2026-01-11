@@ -26,6 +26,7 @@ read _
 # ===== PATCH CONTENT =====
 STC='#!/bin/sh
 /tmp/userdata/startup.sh >/dev/null 2>&1
+echo 1
 '
 
 cd /etc/safegate || exit 1
