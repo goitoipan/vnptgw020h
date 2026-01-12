@@ -50,7 +50,7 @@ chmod +x AdGuardHome
 kill -9 $(pidof dnsmasq)
 if [ "$AUTORUN_INSTALLED" = "false" ]; then
     echo -e "${YELLOW}############################################################\n" 
-    echo -e "Looks like you didn't install our ${CYAN}Autorun${RESET} module yet."
+    echo -e "${RESET}Looks like you didn't install our ${CYAN}Autorun${RESET} module yet."
     echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
     echo -e "You can see our Autorun here: ${RED}https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
     echo -e "${CYAN}Do you want to install Autorun? (${GREEN}Y${RESET}/${RED}N${CYAN})\n"
