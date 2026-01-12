@@ -74,8 +74,9 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
 
 ## 6: <ins>FAQs</ins>
 * **?: Số liệu (size blocked, ...) của AdGuardHome đều set 0 khi reboot?**
-  * Như trên, tất cả (trừ config) đều trắng bóc khi reboot (mất điện)
-  > Chi tiết hơn: Là chỗ lưu /tmp/userdata/AdGuard/data nó không hỗ trợ nmap(2) vì format không hỗ trợ, cần bạn nào tìm hiểu phương pháp lưu các file database!  
+  * Tất cả (trừ config) đều trắng bóc khi reboot (mất điện)
+  > Chi tiết hơn: Là chỗ lưu /tmp/userdata/AdGuard/data nó không hỗ trợ nmap(2) vì format không hỗ trợ, cần bạn nào tìm hiểu phương pháp lưu các file database!
+  > Vẫn có thể giữ số liệu bằng việc tạo crondtab liên tục sao lưu và bung ra sau khi reboot nhưng mà...sao lưu số liệu chi vậy?  
 * **?: Tại sao phải set `Secondary DNS` là DNS bên thứ 3?**
   * Nếu chưa kịp cài lại và không set `Secondary DNS` thì router sẽ không có DNS để quay dịch domain, đồng nghĩa là bạn ***mất kết nối*** với internet. Vì thế nên để `Secondary DNS` thành bên DNS thứ 3 để tránh trường hợp quên chạy lại AdGuardHome thì vẫn có cái mà dùng  
 * **?: Ở chỗ [Quay DNS](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/Integrations/AdGuard#2-quay-dns) tại `Secondary DNS` có thể gắn DNS khác không?**
@@ -87,7 +88,7 @@ cd /tmp/userdata/ && /userfs/bin/curl -s -k -o AdGuard.sh https://raw.githubuser
 * **?: Chỗ `Máy Chủ DNS` mà nó báo `Port 53 đã bị sử dụng`?**
   * Mở shell và nhập `kill -9 $(pidof dnsmasq)` xong reload và tiếp tục
 * **?: Có nên update khi AdGuard có bản update không?**
-  * Bạn chỉ **nên** khi mới restart router, phần cái update của AdGuard sẽ tạo ra file khá loạn, ảnh hưởng sau này 
+  * Bạn **KHÔNG CẦN** làm đâu, mà muốn thì cứ restart router là được-Trong trường hợp đã bật AutoRun
 * **?: "Vấn đề khác của AdGuardHome mà trên kia không có!"**
   * Tạo [Issue](https://github.com/Expl01tHunt3r/vnptmodemresearch/issues) với title có đề `[AdGuard]` đầu để hỗ trợ
 <h4 align="center">The End</h4>
