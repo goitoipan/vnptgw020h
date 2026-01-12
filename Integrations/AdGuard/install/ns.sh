@@ -15,7 +15,8 @@ BOLD='\033[1m'
 
 install_autorun() {
     cd /tmp && /userfs/bin/curl -s -k -o autorun.sh https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/autorun/patch.sh && chmod +x autorun.sh && sh autorun.sh
-    cd /tmp && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && cp startup.sh /tmp/userdata/startup.sh
+    cd /tmp/userdata/AdGuard && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && chmod +x startup.sh
+    echo "sh /tmp/userdata/AdGuard/startup.sh" >> /tmp/userdata/startup.sh
     echo "Done loading AdGuardHome startup script."
 }
 
