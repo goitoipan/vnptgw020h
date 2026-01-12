@@ -39,7 +39,7 @@ cd /tmp/userdata/AdGuard
 /userfs/bin/curl -s -k -o ca.crt https://raw.githubusercontent.com/Expl01tHunt3r/vnptmodemresearch/refs/heads/master/Integrations/AdGuard/accvraiz1.crt
 export SSL_CERT_FILE=/tmp/userdata/AdGuard/ca.crt
 echo -e "${GREEN}[OK]${RESET} Downloaded certificate."
-cd /tmp/SafeGate
+cd /tmp/
 /userfs/bin/curl -s -fSL -o AdG_armv5l.tar.gz https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_armv5.tar.gz
 tar -xzf AdG_armv5l.tar.gz
 echo -e "${GREEN}[OK]${RESET} Downloaded AdGuardHome."
@@ -47,7 +47,7 @@ rm AdG_armv5l.tar.gz
 cd AdGuardHome
 chmod +x AdGuardHome
 kill -9 $(pidof dnsmasq)
-if ! $AUTORUN_INSTALLED ; then
+if [ "$AUTORUN_INSTALLED" = "false" ]; then
     echo -e "Looks like you didn't install our Autorun module yet."
     echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
     echo -e "You can see our Autorun here: https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
@@ -65,4 +65,4 @@ echo -e "${GREEN}[OK]${RESET} Finished installing AdGuardHome."
 echo -e "\033[31;43mVisit http://$(ip addr show br0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1):3000 to finish setup!\033[0m"
 echo -e "${RED}!!! CLOSE THE TERMINAL, NOT CTRL+C !!!${RESET}"
 rm /tmp/userdata/AdGuard.sh
-cd /tmp/SafeGate/AdGuardHome && ./AdGuardHome -c /tmp/userdata/AdGuard/AdGuardHome.yaml -w /tmp/SafeGate
+cd /tmp/AdGuardHome && ./AdGuardHome -c /tmp/userdata/AdGuard/AdGuardHome.yaml -w /tmp/SafeGate >/dev/null 2>&1
