@@ -53,13 +53,13 @@ if [ "$AUTORUN_INSTALLED" = "false" ]; then
     echo -e "${RESET}Looks like you didn't install our ${CYAN}Autorun${RESET} module yet."
     echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
     echo -e "You can see our Autorun here: ${RED}https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
-    echo -e "${CYAN}Do you want to install Autorun? (${GREEN}Y${RESET}/${RED}N${CYAN})\n"
+    echo -e "${CYAN}Do you want to install Autorun? (${GREEN}Y${CYAN}/${RED}N${CYAN})\n"
     echo -e "${YELLOW}############################################################\n${RESET}"
     read CONFIRM_AUTORUN_INSTALL
     case $CONFIRM_AUTORUN_INSTALL in
         [Yy]* ) install_autorun ;;
         [Nn]* ) echo "You choosed no. Thanks for your confirmation." ;;
-        * ) echo "Default is no. You must read......";;
+        * ) echo -e "Default is no. You must read ${CYAN}https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/master/Integrations/AdGuard/README.md#5-m%E1%BA%A5t-%C4%91i%E1%BB%87n";;
     esac
 else
     cd /tmp && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && cp startup.sh /tmp/userdata/startup.sh
