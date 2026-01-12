@@ -45,7 +45,7 @@ rm AdG_armv5l.tar.gz
 cd AdGuardHome
 chmod +x AdGuardHome
 kill -9 $(pidof dnsmasq)
-if [!AUTORUN_INSTALLED]; then
+if ! $AUTORUN_INSTALLED ; then
     echo -e "Looks like you didn't install our Autorun module yet."
     echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
     echo -e "You can see our Autorun here: https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
