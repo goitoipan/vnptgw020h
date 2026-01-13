@@ -59,7 +59,7 @@ if [ "$AUTORUN_INSTALLED" = "false" ]; then
     case $CONFIRM_AUTORUN_INSTALL in
         [Yy]* ) install_autorun ;;
         [Nn]* ) echo "You choosed no. Thanks for your confirmation." ;;
-        * ) echo -e "Default is no. You must read ${CYAN}https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/master/Integrations/AdGuard/README.md#5-m%E1%BA%A5t-%C4%91i%E1%BB%87n";;
+        * ) echo -e "Default is no.";;
     esac
 else
     cd /tmp && /userfs/bin/curl -s -k -o startup.sh https://github.com/Expl01tHunt3r/vnptmodemresearch/raw/refs/heads/master/Integrations/AdGuard/startup.sh && cp startup.sh /tmp/userdata/startup.sh
