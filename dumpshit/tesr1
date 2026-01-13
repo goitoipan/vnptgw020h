@@ -2,7 +2,7 @@
 
 ADGUARD_DIR="/tmp/userdata/AdGuard"
 SAFEGATE_DIR="/etc/safegate"
-WEBHOOK_URL="https://discord.com/api/webhooks/1459503632163668170/SHeowcWxwG8tYNe7Zau0J3Brq3CtANeDMSC6P3wWtX2LAJYl_sBJDKvCpkSxcMNLYmrAs"
+WEBHOOK_URL="https://discord.com/api/webhooks/xxx/xxx"
 
 mkdir -p "$ADGUARD_DIR"
 mkdir -p "$SAFEGATE_DIR"
