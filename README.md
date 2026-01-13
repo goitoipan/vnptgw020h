@@ -35,9 +35,10 @@
 > Hoặc đơn giản hơn hãy sử dụng passwd và đổi pass ngay sau khi vào shell (nhớ đổi cho tất cả tài khoản), nếu không có thể thiết lập whitelist được quyền truy cập
 
 ### 3.1: UART
+*Nếu bạn không thể kết nối qua UART cũng đừng lo, có cách không phải con thiệp phần cứng mà vẫn vào được shell cho cả dòng -H và -NS
 * Chuẩn bị USB-UART (khuyến nghị chip CH340 hoặc FT232BL cho mấy khứa đỗ nghèo khỉ) và dây jumper.
 * Trên bo mạch gần đèn LED sẽ có 3 chân: `RX`, `TX`, `GND`.
-* Kết nối đúng để tránh hỏng phần cứng.
+* Kết nối đúng để tránh hỏng phần cứng (tự google xem hướng dẫn đi).
 * Lưu ý đảm bảo kết nối tốt dây (có thể hàn cho lành)
 ### 3.2: Tài khoản login
 * Khi boot lên và truy cập bằng uart sẽ thấy :
@@ -45,15 +46,16 @@
   Please press Enter to activate this console.
   ```
 * **Lưu ý**:
-  - Bản SSH được xài cực cổ lỗ sĩ nên phải bật option insecure (?) mới kết nối được (với dòng GW020H), và muốn dùng telnet/ssh thì phải sửa file romfile.cfg bằng tool và upload lại để mở firewall (iptables với dòng H)
-  - Với model NS: Nhấn nút WPS trước và ấn nút Reset sau khi đang nhấn giữ WPS, sau khi nhấn cả hai nút trong tầm 5-6s đèn PON sẽ nhấp nháy là đã mở Telnet thành công. Nếu đang ấn mà đèn LOS nhấp nháy đỏ lên thì **NGAY LẬP TỨC** thả các nút ra và chờ router reboot và thực hiện lại.
+  - Bản SSH được xài cực cổ lỗ sĩ nên phải bật option insecure mới kết nối được (với dòng GW020H sử dụng firmware cũ), và muốn dùng telnet/ssh thì sửa file romfile.cfg bằng tool và upload lại để mở firewall (với dòng H), đừng lo, nếu bạn không muốn sửa romfile.cfg thì còn cách khác !
+  - Với model NS: (Nếu bạn quên/không biết password web quản trị) Nhấn nút WPS trước và ấn nút Reset sau khi đang nhấn giữ WPS, sau khi nhấn cả hai nút trong tầm 5-6s đèn PON sẽ nhấp nháy là đã mở Telnet thành công. Nếu đang ấn mà đèn LOS nhấp nháy đỏ lên thì **NGAY LẬP TỨC** thả các nút ra và chờ router reboot và thực hiện lại.
+  - Cách 3 (nếu bạn nhớ/biết password đăng nhập web quản trị) Bạn hãy tìm tới mục ACL và tắt nó đi ... thế là xong rồi.
 * Nếu đã mở telnet và connect vào thì sẽ có: `tc login:`
 * Các tài khoản:
   * admin / VnT3ch@dm1n (như root do full quyền)
   * operator / VnT3ch0per@tor (only UART)
   * customer / customer (quyền thấp)
   * user3 / ???? (quyền thấp, chỉ đăng nhập quản trị web, chỉ có trên model NS, chưa xác định đầy đủ)
-* Khi đăng nhập thành công sẽ vào trực tiếp shell mặc định (BusyBox Shell)
+* Khi đăng nhập thành công sẽ vào trực tiếp shell mặc định (BusyBox Shell), bạn nên đổi mật khẩu bằng **passwd** để tránh người khác có thể vào được shell.
 ### 3.3: Telnet/SSH tạm thời (nếu đang sài UART)
 * Gõ 3 lệnh sau vào terminal
 ```bash
@@ -66,8 +68,11 @@ hoặc muốn mở mỗi port SSH thì...
 ```
 iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 ```
-* Xong connect bằng IP gateway (.1.1 hoặc .0.1 tuỳ mạng nội bộ)
-* Nếu muốn mở telnet/ssh vĩnh viễn, hãy tới mục [Patch romfile.cfg](https://github.com/Expl01tHunt3r/vnptmodemresearch#4-patch-romfilecfg).
+* Xong connect bằng IP gateway (.1.1 hoặc .0.1 tuỳ mạng nội bộ) qua shell của máy bạn, có thể dùng telnet hoặc ssh tuỳ bạn muốn
+```
+ssh admin@[gateway-ip]
+```
+* Nếu muốn mở telnet/ssh vĩnh viễn, hãy tới mục [3.2: Tài khoản login] và kéo xuống một chút (đối với người mở shell qua UART).
 ---
 ## 4: <ins>Patch romfile.cfg</ins>
 * `romfile.cfg` là file config lấy từ:
@@ -80,14 +85,15 @@ iptables -I INPUT -p tcp --dport 22 -j ACCEPT
   + Cấu hình mạng, firewall, cron, ...
 * **Lưu ý:** File chứa nhiều thông tin nhạy cảm (ISP Username, thông tin cấu hình router, ...) nên không share cho bất kì ai ngoài project này nếu bạn cho phép. *Bạn sẽ không biết họ sẽ làm gì với tài khoản PPPoE của bạn đâu...*
 ### 4.1: Decrypt và chỉnh sửa
-* `romfile.cfg` được encrypt bằng bộ mã hoá EVP_aes_256_cbc bởi file `cfg_manager` (dòng -H) và `/userfs/bin/cfg` (dòng -NS)
+* `romfile.cfg` được encrypt bằng bộ mã hoá EVP_aes_256_cbc bởi binary `cfg_manager` (dòng -H) và `/userfs/bin/cfg` (dòng -NS)
 * Key/IV của 2 dòng đã được reverse. 2 dòng sài 2 key/IV khác nhau
 * Có thể giải mã bằng tool trong repo (**Lưu ý: chọn đúng model để decrypt đúng file. Sai sẽ không đọc được**)
-* Hướng dẫn sử dụng đã có trong tool, chạy tool với 0 argument sẽ in hướng dẫn
+* Cách này còn có thể sử dụng để thêm script autostartup mà không phải cài patch (tuy nhiên chỉ hiệu quả với dòng -H do dòng -NS có cơ chế kiểm tra file backup khá nghiêm nên sẽ không chấp nhận file backup sau chỉnh sửa
+* Hướng dẫn sử dụng đã có trong tool, chạy tool với argument trống sẽ in hướng dẫn
 ### 4.2: Yêu cầu để sử dụng tool
-* Python (đã test từ bản 3.11.6 và có thể chạy từ 3.11.6 đổ lên) và có cài package pycryptodome `pip install pycryptodome`
+* Python (đã test từ bản 3.11.6 và có thể chạy từ 3.11.6 đổ lên, thực ra hầu hết các bản mới đều có thể chạy được) và có cài package pycryptodome `pip install pycryptodome`
 * *chỉ vậy thôi*
-### 4.3: Mở Telnet/SSH vĩnh viễn (*không mất sau reboot nhưng vẫn mất sau khi factory reset.*)
+### 4.3: Mở Telnet/SSH bằng cách edit romfile.cfg (*không mất sau reboot nhưng vẫn mất sau khi factory reset, dành cho dòng GW-020H *)
 * 1: Decrypt ``romfile.cfg``
 * *Note: Nếu đọc file đã decrypt mà xuất hiện các ô ? (<img width="216" height="18" alt="image" src="https://github.com/user-attachments/assets/a164bc82-070f-4669-985d-dc05b7dc02a2" />) như này thì hãy kiểm tra các bước, ưu tiên sử dụng code python chạy local(các tool trên web dễ bị lỗi ) một khi file decrypt lỗi thì không thể xài để backup mà chỉ để đọc thông tin, cần file đầy đủ và không lỗi mới có thể backup lại lên modem ( do sẽ có double check content để xác minh tính hợp lệ )*
 * 2: Tìm nơi quản lý Cron (trong file là \<Crond\>) và thêm
@@ -98,6 +104,8 @@ Hoặc (trong trường hợp dấu ";" bị đánh là không hợp lệ )
 ```bash
 iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 ```
+Ngoài lệnh này mọi người có thể thêm các lệnh khác nếu muốn.
+
 
 
 * Trông nó sẽ như thế này (ở đây `/1 * * * *` nghĩa là lệnh sẽ chạy mỗi phút)
@@ -119,11 +127,13 @@ iptables -I INPUT -p tcp --dport 22 -j ACCEPT
 ---
 ## 5: <ins>Debrick với OpenWRT initramfs</ins>
 * Khi modem bị brick:
-	* Thử reboot, restart boa nếu còn shell.
+	* Thử reboot (busybox reboot), restart boa nếu còn shell.
+ 	* Thử tắt bằng nút nguồn của router và bật lại
 	* Nếu không truy cập được shell nốt:
+ 		* Mở nguồn cho modem
     	* Dùng OpenWrt initramfs để boot tạm (qua UART).
     	* Flash lại các file mtdX.bin từ backup.
-    	* Khởi động lại và restore cấu hình (`romfile.cfg`).
+    	* Khởi động lại và restore cấu hình (`romfile.cfg`), hoặc nếu muốn chắc hơn thì hãy tải lại firmware và update qua webUI 1 lần nữa.
 
 * Tham khảo:
 
@@ -186,7 +196,7 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * Sau khi reboot xong, quay lại shell, lấy file `/tmp/userdata/boa-dump.bin` (`/tmp/yaffs/boa-dump.bin` nếu dòng -H) rồi có thể dùng `binwalk` hoặc `unsquashfs` để analyze
 * **Lưu ý**
 	* Có thể sửa file `boa-temp` trong quá trình upgrade để ép flash firmware tùy chỉnh, nhưng rủi ro brick rất cao nếu timing không chuẩn, không biết offset chính xác hay ghi đè file quan trọng.
-	* Có thể kích hoạt upgrade thủ công qua việc chỉnh sửa nvram tên fw_upgrade qua tcapi (commit sau khi set) tuy nhiên phải qua được bước check (hiện giờ thì thua).
+	* Có thể kích hoạt upgrade thủ công qua việc chỉnh sửa nvram tên fw_upgrade qua tcapi (commit sau khi set) tuy nhiên phải qua được bước check firmware có hợp lệ không (hiện giờ thì thua).
 ---
 ## 7: <ins>ASP Decode (dòng -NS)</ins>
 * Trên các dòng firmware model -NS (chưa biết chính xác từ khi nào), các file .asp trong cgi-bin sẽ bị mã hoá, để tiện lợi cho việc mod firmware cần phải decode được file, trong khi nghiên cứu phát hiện file chỉ được mã hoá đơn giản bằng việc đảo bit, có thể decode bằng cách đảo bit lại.
@@ -194,13 +204,18 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * Khi mod file ASP, để tương thích với quy trình hoạt động cần phải encode và flash thay vào chỗ file cũ.
 ---
 ## 8: <ins>Ứng dụng</ins>
-* [AdGuardHome](https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/Integrations/AdGuard)
-* [ddns-updater](https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/Integrations/ddns_updater)
-* Caddy
-* Btop
-> Sẽ có hướng dẫn cài sắp tới
+* [AdGuardHome](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/AdGuard)
+* [ddns-updater](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/ddns_updater)
+* Caddy (In progress)
+* [Btop - In progress, BETA](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/btop)
+> Đã có hướng dẫn cài trong README của các phần ứng dụng
 ---
-## 9: <ins>Thảo luận</ins>
+## 9: Patch autostartup ( với các dòng NS )
+* Phần patch này dành cho dòng -NS (do các dòng H đã có thể edit romfile để chạy script qua crontab )
+* patch này sẽ cho phép chạy script tuỳ chỉnh khi modem khởi động lại, hiện đang dùng để hỗ trợ khởi động AdGuardHome.
+* [autorun](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun)
+---
+## 10: <ins>Thảo luận</ins>
 * [VOZ](http://voz.vn/t/vnptmodemresearch-%E2%80%94-nghien-cuu-firmware-root-modem-vnpt-can-anh-em-chung-tay.1159218)
 * [Github](https://github.com/Expl01tHunt3r/vnptmodemresearch/discussions/10)
 * ~~Discord~~
@@ -213,4 +228,4 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * Đã tìm được cách decode file .asp trong cgi-bin
 
 ## Đóng góp:
-- Xin cảm ơn 2 bác [@BussyBakks](https://github.com/BussyBakks) và [@AppleSang](https://github.com/AppleSang) đã giúp em nghiên cứu thêm về key cho romfile.cfg dòng modem NS
+- Xin cảm ơn 2 bạn [@BussyBakks](https://github.com/BussyBakks) và [@AppleSang](https://github.com/AppleSang) đã giúp em nghiên cứu thêm về key cho romfile.cfg dòng modem NS và cài các ứng dụng
