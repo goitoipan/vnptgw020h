@@ -2,6 +2,7 @@
 <h4 align="center">Chớ gì phải tự chạy lại thủ công mỗi lần cúp điện, nhể?</h4>
 <h6 align="left">AppleSang, D:11/M:01/Y:2026</h6>
 <h6 align="left">BussyBakks, D:11/M:01/Y:2026</h6>
+<h6 align="left">Expl01tHunt3r, D:13/M:01/Y:2026</h6>
 
 ## 1: <ins>Yêu cầu</ins>
 <img width="128" height="128" alt="image" src="https://github.com/user-attachments/assets/b17f8ebf-e35e-4d68-9d60-a06b93767dc8" align="right" />
