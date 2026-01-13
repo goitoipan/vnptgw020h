@@ -37,6 +37,7 @@ chmod +x startup.sh
 
 echo -e "${GREEN}Patch completed!${RESET}"
 echo -e "Startup script located at \"/tmp/userdata/startup.sh\""
-echo -e "Edit it using echo and sed, or not remove that file and download your own."
+echo -e "Edit it using echo and sed, or not remove that file and upload your own."
 echo -e "Note: The file ${RED}MUST${RESET} named as \"startup.sh\" at \"/tmp/userdata\" to work."
 echo -e "${CYAN}Example: ${RED}echo -e 'echo Router have been patched with Autorun.' > startup.sh ${RESET}"
+echo -e "Warn: The output of the script in startup.sh ${RED}MUST NOT${RESET} output anything directly to the shell."
