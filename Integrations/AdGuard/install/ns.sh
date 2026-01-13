@@ -53,8 +53,8 @@ if [ "$AUTORUN_INSTALLED" = "false" ]; then
     echo -e "${RESET}Looks like you didn't install our ${CYAN}Autorun${RESET} module yet."
     echo -e "You will need to login into this shell and start AdGuardHome ${BOLD}every single time${RESET} your router reboots."
     echo -e "You can see our Autorun here: ${RED}https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/master/Integrations/autorun"
-    echo -e "${YELLOW}############################################################\n${RESET}"
-    echo -e "${CYAN}Do you want to install Autorun? (${GREEN}Y${CYAN}/${RED}N${CYAN})\n"
+    echo -e "${YELLOW}############################################################\n"
+    echo -e "${CYAN}Do you want to install Autorun? (${GREEN}Y${CYAN}/${RED}N${CYAN})${RESET}\n"
     read CONFIRM_AUTORUN_INSTALL
     case $CONFIRM_AUTORUN_INSTALL in
         [Yy]* ) install_autorun ;;
