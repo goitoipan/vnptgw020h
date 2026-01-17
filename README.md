@@ -56,7 +56,7 @@
   * operator / VnT3ch0per@tor (only UART)
   * customer / customer (quyền thấp)
   * user3 / ???? (quyền thấp, chỉ đăng nhập quản trị web, có trên model NS, XS, chưa xác định đầy đủ)
-*Riêng cho dòng XS
+* Riêng cho dòng -XS
   * customer / customer (quyền thấp, telnet)
   * admin / $2$7c1ae60c120167530ca98a32c5323d9b89cff5bb (hash, chưa tìm ra pass chính xác, telnet, console, ftp)
   * operator / $1$y....DM.$7eLwNxxQmjB1WmfB.ancV/ (hash, chưa tìm ra pass chính xác, web)
