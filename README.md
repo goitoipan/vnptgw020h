@@ -3,9 +3,9 @@
 ***<h4 align="center">Không gì là không thể :)</h4>***
 
 ## 1: <ins>Mục tiêu</ins>
-* Nghiên cứu về các modem nhà mạng 4 chữ (VNPT) (hiện tại đang nghiên cứu các dòng -H, -NS, có thể dòng -HS trong tương lai ~~gần~~)
+* Nghiên cứu về các modem nhà mạng 4 chữ (VNPT) (hiện tại đang nghiên cứu các dòng -H, -NS, -XS
 * Phá firmware, tìm hiểu cơ chế encryption trong firmware (nếu ra và rảnh thì cố mod OpenWRT qua luôn)
-* Vọc vạch hỏng modem thì có file để debrick
+* Vọc vạch hỏng modem thì có file để debrick (hiện tại chỉ có thể debrick cho dòng -H, -NS)
   
 > [!CAUTION]
 > **⚠️ Miễn trừ trách nhiệm ⚠️**<br>
@@ -19,6 +19,7 @@
 * [`flashdump/*`](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/flashdump) NAND dump của firmware model GW-020H
 * [`openwrt-initramfs-en751221/*`](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/openwrt-initramfs-en751221) dùng để debrick nếu vọc vạch cháy firmware
 * [`tools/*`](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/tools) các tool để decrypt và encrypt romfile.cfg
+* Sắp tới sẽ cập nhật tool encrypt, decrypt cho dòng -XS (050)
 * Dump firmware đã được strip trong [`squashfs-modified`](https://github.com/Expl01tHunt3r/vnptmodemresearch/tree/main/squashfs-modified):
 	* `boa-dump.bin`: firmware gốc (GW020-H) trong quá trình upgrade qua web UI.
 	* `squashfs.image`: phần squashfs đã được tách (GW020-H), có thể giải nén bằng `unsquashfs`.
@@ -54,7 +55,13 @@
   * admin / VnT3ch@dm1n (như root do full quyền)
   * operator / VnT3ch0per@tor (only UART)
   * customer / customer (quyền thấp)
-  * user3 / ???? (quyền thấp, chỉ đăng nhập quản trị web, chỉ có trên model NS, chưa xác định đầy đủ)
+  * user3 / ???? (quyền thấp, chỉ đăng nhập quản trị web, có trên model NS, XS, chưa xác định đầy đủ)
+*Riêng cho dòng XS
+  * customer / customer (quyền thấp, telnet)
+  * admin / $2$7c1ae60c120167530ca98a32c5323d9b89cff5bb (hash, chưa tìm ra pass chính xác, telnet, console, ftp)
+  * operator / $1$y....DM.$7eLwNxxQmjB1WmfB.ancV/ (hash, chưa tìm ra pass chính xác, web)
+  * user3 / $2$298720016d05adc5a15da940aad9b44cf100bbeb (hash, chưa tìm ra pass, web, disable by default)
+
 * Khi đăng nhập thành công sẽ vào trực tiếp shell mặc định (BusyBox Shell), bạn nên đổi mật khẩu bằng **passwd** để tránh người khác có thể vào được shell.
 ### 3.3: Telnet/SSH tạm thời (nếu đang sài UART)
 * Gõ 3 lệnh sau vào terminal
@@ -84,11 +91,12 @@ ssh admin@[gateway-ip]
   + SSID, mật khẩu Wi-Fi
   + Cấu hình mạng, firewall, cron, ...
 * **Lưu ý:** File chứa nhiều thông tin nhạy cảm (ISP Username, thông tin cấu hình router, ...) nên không share cho bất kì ai ngoài project này nếu bạn cho phép. *Bạn sẽ không biết họ sẽ làm gì với tài khoản PPPoE của bạn đâu...*
+* File cfg đã decrypt của dòng XS có thể tìm thấy trong data của repo này
 ### 4.1: Decrypt và chỉnh sửa
-* `romfile.cfg` được encrypt bằng bộ mã hoá EVP_aes_256_cbc bởi binary `cfg_manager` (dòng -H) và `/userfs/bin/cfg` (dòng -NS)
-* Key/IV của 2 dòng đã được reverse. 2 dòng sài 2 key/IV khác nhau
-* Có thể giải mã bằng tool trong repo (**Lưu ý: chọn đúng model để decrypt đúng file. Sai sẽ không đọc được**)
-* Cách này còn có thể sử dụng để thêm script autostartup mà không phải cài patch (tuy nhiên chỉ hiệu quả với dòng -H do dòng -NS có cơ chế kiểm tra file backup khá nghiêm nên sẽ không chấp nhận file backup sau chỉnh sửa
+* `romfile.cfg` được encrypt bằng bộ mã hoá EVP_aes_256_cbc bởi binary `cfg_manager` (dòng -H) và `/userfs/bin/cfg` (dòng -NS,-XS)
+* Key/IV của 2 dòng -H và -NS đã được reverse. 2 dòng sài 2 key/IV khác nhau riêng đối với dòng -XS sử dụng PKCS7 với private key đã được dump
+* Có thể giải mã bằng tool trong repo (**Lưu ý: chọn đúng model để decrypt đúng file. Sai sẽ không đọc được, model cho dòng XS đang được code**)
+* Cách này còn có thể sử dụng để thêm script autostartup mà không phải cài patch (tuy nhiên chỉ hiệu quả với dòng -H do dòng -NS có cơ chế kiểm tra file backup khá nghiêm nên sẽ không chấp nhận file backup sau chỉnh sửa, dòng -XS có crc32 để check nhưng vẫn patch được (dùng để patch password bằng cách thay hash khác)
 * Hướng dẫn sử dụng đã có trong tool, chạy tool với argument trống sẽ in hướng dẫn
 ### 4.2: Yêu cầu để sử dụng tool
 * Python (đã test từ bản 3.11.6 và có thể chạy từ 3.11.6 đổ lên, thực ra hầu hết các bản mới đều có thể chạy được) và có cài package pycryptodome `pip install pycryptodome`
@@ -142,6 +150,7 @@ Ngoài lệnh này mọi người có thể thêm các lệnh khác nếu muốn
   * Hãy đọc và làm theo hướng dẫn tại mục [Debricking](https://openwrt.org/inbox/toh/tp-link/archer_vr1200v#debricking) của Router TP-Link Archer VR1200v đến từ OpenWRT.
 
  * Cảm ơn [@cjdelisle](https://github.com/cjdelisle) cho bản [initramfs](https://github.com/Expl01tHunt3r/vnptmodemresearch/blob/main/openwrt-initramfs-en751221/openwrt-en75-en751221-en751221_generic-initramfs-kernel.bin)!
+ * Hiện tại chưa xác định chính xác nhưng khả năng model XS lấy nền firmware từ 1 nhà sản xuất Trung Quốc baidu (?)
 ---
 ## 6: <ins>Decode firmware từ `/tmp/boa-temp`</ins>
 <details>
@@ -226,6 +235,7 @@ chmod +x /tmp/auto_dump_boatemp.sh
 * Hiện đã có key/iv cho dòng NS, đã cải tiến code để có thêm option cho dòng NS
 * Xác nhận tool edit romfile đã chạy được với các model [GW020-H](https://www.vnpt-technology.vn/vi/product_detail/gpon-ont-igate-gw020-h), [GW240-H](https://www.vnpt-technology.vn/vi/product_detail/gpon-ont-igate-gw240-h), [GW040-H](https://www.vnpt-technology.vn/vi/product_detail/gpon-ont-igate-gw040-h), [GW040-NS](https://www.vnpt-technology.vn/vi/product_detail/gpon-ont-igate-gw040-ns) 
 * Đã tìm được cách decode file .asp trong cgi-bin
+* Các file cfg trên model có cấu trúc như sau nén gzip->header HD3R,version,length,...(256bytes)->data encrypt by PKCS7 structure
 
 ## Đóng góp:
 - Xin cảm ơn 2 bạn [@BussyBakks](https://github.com/BussyBakks) và [@AppleSang](https://github.com/AppleSang) đã giúp em nghiên cứu thêm về key cho romfile.cfg dòng modem NS và cài các ứng dụng
